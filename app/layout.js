@@ -11,7 +11,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="geistSans geistMono antialiased">
         <Navbar />
-        {children}
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
