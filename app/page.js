@@ -14,7 +14,7 @@ export default function Homepage() {
           </p>
 
           {/* Search Section */}
-          <Search />
+          <Search fromList={false}/>
         </div>
       </div>
     </section>
