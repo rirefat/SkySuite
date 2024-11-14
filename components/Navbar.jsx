@@ -34,7 +34,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <Link href="/login" className="login">Login</Link>
+          <Link href="/login" className="login shadow-md hover:shadow-blue-400 transition duration-300">Login</Link>
         </li>
       </ul>
     </nav>

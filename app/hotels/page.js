@@ -5,7 +5,6 @@ import { getAllHotels } from "@/database/queries/queries";
 
 export default async function HotelListPage() {
     const allHotels = await getAllHotels();
-    console.log(allHotels);
 
     return (
         <>
