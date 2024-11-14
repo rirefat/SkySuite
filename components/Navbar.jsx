@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 
-const Navbar = () => {
+const Navbar = ({ sideMenu }) => {
   return (
     <nav>
       <Link href="/">
@@ -16,27 +16,30 @@ const Navbar = () => {
         </span>
       </Link>
 
-      <ul>
-        <li>
-          <Link href="#">Recommended Places</Link>
-        </li>
+      {
+        sideMenu &&
+        <ul>
+          <li>
+            <Link href="#">Recommended Places</Link>
+          </li>
 
-        <li>
-          <Link href="#">About Us</Link>
-        </li>
+          <li>
+            <Link href="#">About Us</Link>
+          </li>
 
-        <li>
-          <Link href="#">Contact us</Link>
-        </li>
+          <li>
+            <Link href="#">Contact us</Link>
+          </li>
 
-        <li>
-          <Link href="/bookings">Bookings</Link>
-        </li>
+          <li>
+            <Link href="/bookings">Bookings</Link>
+          </li>
 
-        <li>
-          <Link href="/login" className="login shadow-md hover:shadow-blue-400 transition duration-300">Login</Link>
-        </li>
-      </ul>
+          <li>
+            <Link href="/login" className="login shadow-md hover:shadow-blue-400 transition duration-300">Login</Link>
+          </li>
+        </ul>
+      }
     </nav>
   )
 }

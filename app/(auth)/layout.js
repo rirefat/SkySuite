@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import "./globals.css";
+import "../globals.css";
 import { connectDB } from "@/database/service/mongo";
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="geistSans geistMono antialiased">
-        <Navbar />
+        <Navbar sideMenu={false}/>
         <main>
           {children}
         </main>
