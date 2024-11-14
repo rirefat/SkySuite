@@ -36,7 +36,7 @@ const Navbar = ({ sideMenu }) => {
           </li>
 
           <li>
-            <Link href="/login" className="login shadow-md hover:shadow-blue-400 transition duration-300">Login</Link>
+            <Link href="/login" className="login shadow-lg hover:shadow-blue-400 transition duration-300">Login</Link>
           </li>
         </ul>
       }

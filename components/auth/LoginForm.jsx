@@ -19,9 +19,10 @@ const LoginForm = () => {
         </button>
       </form>
 
-      <Link href="/registration" className="text-center block my-4 font-thin text-gray-500">
-        Don&apos;t have any account? <span className="text-blue-500 font-bold hover:underline">Register Now</span>
-      </Link>
+      <div className="text-center text-s text-gray-500">
+        <Link href='/registration' className="text-blue-600 font-bold hover:underline mx-1">Register</Link>
+        or SignUp with
+      </div>
     </>
   );
 };

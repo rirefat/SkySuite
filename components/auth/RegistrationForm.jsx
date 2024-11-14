@@ -29,9 +29,11 @@ const RegistrationForm = () => {
         </button>
       </form>
 
-      <Link href="/login" className="text-center block my-4 font-thin text-gray-500">
-        Have an account? <span className="text-blue-500 font-bold hover:underline">Login</span>
-      </Link>
+
+      <div className="text-center text-s text-gray-500">
+        <Link href='/login' className="text-blue-600 font-bold hover:underline mx-1">Login</Link>
+        or SignUp with
+      </div>
     </>
   );
 };
