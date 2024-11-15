@@ -1,7 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
+import { auth } from "@/auth"
+import LogoutBTN from "./auth/LogoutBTN";
 
-const Navbar = ({ sideMenu }) => {
+const Navbar = async ({ sideMenu }) => {
+  const session = await auth();
   return (
     <nav>
       <Link href="/">
@@ -36,7 +39,14 @@ const Navbar = ({ sideMenu }) => {
           </li>
 
           <li>
-            <Link href="/login" className="login shadow-lg hover:shadow-blue-400 transition duration-300">Login</Link>
+            {
+              session?.user ?
+                <LogoutBTN /> :
+                <Link
+                  href="/login"
+                  className="login shadow-lg hover:shadow-blue-400 transition duration-300"
+                >Login</Link>
+            }
           </li>
         </ul>
       }
