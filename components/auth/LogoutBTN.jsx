@@ -3,7 +3,7 @@ import { signOut } from "next-auth/react";
 
 const LogoutBTN = () => {
     const handleLogOut = () => {
-        signOut();
+        signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_ROOT_PAGE}/login` });
     }
 
     return (
