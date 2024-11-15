@@ -22,13 +22,13 @@ export const {
             },
 
             async authorize(credentials) {
-                if (credentials === null) return null;
+                if (credentials == null) return null;
 
                 try {
                     const user = await UserModel.findOne({ email: credentials?.email });
 
                     if (user) {
-                        const isMatch = user?.email === credentials?.password;
+                        const isMatch = user.password === credentials.password;
 
                         if (isMatch) {
                             return user;
