@@ -1,21 +1,30 @@
-import React from 'react';
+import { auth } from "@/auth";
+import Image from "next/image";
 
-const UserInfo = () => {
+const UserInfo = async () => {
+    const session = await auth();
+    console.log(session)
     return (
         <div className="container">
             {/* profile info  */}
             <div className="flex flex-col items-center py-8 text-center">
                 {/* profile image  */}
                 <div
-                    className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] bg-blue-600 grid place-items-center text-4xl text-white">
-                    R
+                    className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] bg-slate-600 grid place-items-center text-4xl text-white shadow-lg">
+                    <Image
+                        src={session?.user?.image}
+                        alt={`Image of ${session?.user?.name}`}
+                        width={95}
+                        height={95}
+                        className="rounded-full"
+                    />
                 </div>
                 {/* name , email  */}
                 <div>
                     <h3 className="text-2xl font-semibold lg:text-[28px]">
-                        Rafiul Islam
+                        {session?.user?.name ?? "User Name"}
                     </h3>
-                    <p className="leading-[231%] lg:text-lg">rirefat@gmail.com</p>
+                    <p className="leading-[231%] lg:text-lg">{session?.user?.email ?? "User Email"}</p>
                 </div>
 
 
