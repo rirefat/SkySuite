@@ -10,9 +10,9 @@ const UserInfo = async () => {
             <div className="flex flex-col items-center py-8 text-center">
                 {/* profile image  */}
                 <div
-                    className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] bg-slate-600 grid place-items-center text-4xl text-white shadow-lg">
+                    className="relative max-h-[180px] max-w-[180px] rounded-full lg:mb-8 h-[100px] w-[100px] bg-slate-200 grid place-items-center text-4xl text-white shadow-lg">
                     <Image
-                        src={session?.user?.image}
+                        src={session?.user?.image ?? '/user.png'}
                         alt={`Image of ${session?.user?.name}`}
                         width={95}
                         height={95}

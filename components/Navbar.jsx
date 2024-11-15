@@ -23,15 +23,15 @@ const Navbar = async ({ sideMenu }) => {
         sideMenu &&
         <ul>
           <li>
-            <Link href="#">Recommended Places</Link>
+            <Link href="/recommended-places">Recommended Places</Link>
           </li>
 
           <li>
-            <Link href="#">About Us</Link>
+            <Link href="/about-us">About Us</Link>
           </li>
 
           <li>
-            <Link href="#">Contact us</Link>
+            <Link href="/contact">Contact us</Link>
           </li>
 
           <li>
@@ -41,7 +41,12 @@ const Navbar = async ({ sideMenu }) => {
           <li>
             {
               session?.user ?
-                <LogoutBTN /> :
+
+                <>
+                  <span className="font-bold mr-4">🙎🏻‍♂️ {session?.user?.name.split(" ")[0]}</span>
+                  <LogoutBTN />
+                </>
+                :
                 <Link
                   href="/login"
                   className="login shadow-lg hover:shadow-blue-400 transition duration-300"
