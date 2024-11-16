@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import bcrypt from "bcryptjs";
 import Google from "next-auth/providers/google";
 import Facebook from "next-auth/providers/facebook";
 import Credentials from "next-auth/providers/credentials";
@@ -28,7 +29,7 @@ export const {
                     const user = await UserModel.findOne({ email: credentials?.email });
 
                     if (user) {
-                        const isMatch = user.password === credentials.password;
+                        const isMatch = bcrypt.compare(user.password, credentials.password);
 
                         if (isMatch) {
                             return user;
