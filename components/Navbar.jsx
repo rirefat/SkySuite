@@ -43,7 +43,7 @@ const Navbar = async ({ sideMenu }) => {
               session?.user ?
 
                 <>
-                  <span className="font-bold mr-4">🙎🏻‍♂️ {session?.user?.name.split(" ")[0]}</span>
+                  <Link href={`/user/userId`} className="font-bold mr-4">🙎🏻‍♂️ {session?.user?.name.split(" ")[0]}</Link>
                   <LogoutBTN />
                 </>
                 :
