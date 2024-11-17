@@ -24,7 +24,7 @@ export default async function HotelListPage() {
                     <Filter />
 
                     {/* Hotel list area */}
-                    <HotelList />
+                    <HotelList allHotels={allHotels} />
                 </div>
 
             </section>
