@@ -16,6 +16,7 @@ const HotelCard = ({ hotelInfo }) => {
                     <span className="font-medium">Very Good</span>
                     <span>232 Reviews</span>
                 </div>
+                <span className="border border-gray-300 text-xs font-semibold text-slate-500 p-2 rounded">⭐ {hotelInfo?.propertyCategory} Star Category Hotel</span>
             </div>
 
             <div className="flex flex-col gap-2 items-end justify-center">
