@@ -1,7 +1,9 @@
 'use client'
+// import { auth } from "@/auth";
 import { useState } from "react";
 
 const ReviewsSection = () => {
+    // const session = auth();
   const [reviews, setReviews] = useState([
     {
       id: 1,

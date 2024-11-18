@@ -2,6 +2,7 @@ import HotelList from "@/components/hotel/HotelList";
 import Filter from "@/components/search/Filter";
 import Search from "@/components/search/Search";
 import { getAllHotels } from "@/database/queries";
+import { Suspense } from "react";
 
 export default async function HotelListPage() {
     const allHotels = await getAllHotels();
@@ -24,7 +25,9 @@ export default async function HotelListPage() {
                     <Filter />
 
                     {/* Hotel list area */}
-                    <HotelList allHotels={allHotels} />
+                    <Suspense fallback={<p className="text-center">Loading...</p>}>
+                        <HotelList allHotels={allHotels} />
+                    </Suspense>
                 </div>
 
             </section>
