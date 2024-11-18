@@ -1,7 +1,7 @@
 import HotelList from "@/components/hotel/HotelList";
 import Filter from "@/components/search/Filter";
 import Search from "@/components/search/Search";
-import { getAllHotels } from "@/database/queries/queries";
+import { getAllHotels } from "@/database/queries";
 
 export default async function HotelListPage() {
     const allHotels = await getAllHotels();

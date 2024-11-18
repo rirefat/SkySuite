@@ -1,4 +1,4 @@
-import { replaceMongoIdInArray } from "@/utils";
+import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils";
 import { HotelsModel } from "../models/hotels-model"
 import { RatingsModel } from "../models/ratings-model";
 import { ReviewModel } from "../models/reviews-model";
@@ -8,6 +8,11 @@ export const getAllHotels = async () => {
         .select((["thumbNailUrl", "name", "highRate", "lowRate", "city", "propertyCategory"]))
         .lean();
     return replaceMongoIdInArray(allHotels);
+}
+
+export const getSingleHotel = async (id) => {
+    const hotel = await HotelsModel.findById(id).lean();
+    return replaceMongoIdInObject(hotel);
 }
 
 export const getHotelRatings = async (hotelId) => {
