@@ -23,7 +23,7 @@ const UserInfo = async () => {
                 <div>
                     <h3 className="text-2xl font-semibold lg:text-[28px] flex justify-center items-center gap-2">
                         {session?.user?.name ?? "User Name"}
-                        <span className="rounded-full border border-gray-300 text-xs md:text-sm font-thin text-slate-500 px-3 rounded">
+                        <span className="rounded-full border border-gray-300 text-xs md:text-sm font-thin text-slate-500 px-3">
                             Not Verified
                         </span>
                     </h3>

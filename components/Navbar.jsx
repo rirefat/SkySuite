@@ -37,6 +37,9 @@ const Navbar = async ({ sideMenu }) => {
           <li>
             <Link href="/bookings">Bookings</Link>
           </li>
+          <li>
+            <Link href="/hotels">Hotels</Link>
+          </li>
 
           <li>
             {
