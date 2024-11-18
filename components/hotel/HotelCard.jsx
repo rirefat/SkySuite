@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HotelReviewsRatings from "./HotelReviewsRatings";
 
 const HotelCard = ({ hotelInfo }) => {
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
@@ -20,13 +21,7 @@ const HotelCard = ({ hotelInfo }) => {
                 <Link href={`/hotels/${hotelInfo?.id}`} className="font-bold text-lg md:text-xl hover:underline underline-offset-1">{hotelInfo?.name}</Link>
                 <p className="text-sm text-gray-600">📍 {hotelInfo?.city}</p>
 
-                <div className="flex gap-2 items-center my-4">
-                    <div className="bg-primary w-[35px] h-[35px] rounded-sm text-white grid place-items-center font-bold">
-                        5.3
-                    </div>
-                    <span className="font-medium text-sm md:text-base">Very Good</span>
-                    <span className="text-xs md:text-sm text-gray-500">232 Reviews</span>
-                </div>
+                <HotelReviewsRatings id={hotelInfo?.id}/>
 
                 <span className="border border-gray-300 text-xs md:text-sm font-semibold text-slate-500 p-2 rounded">
                     ⭐ {hotelInfo?.propertyCategory} Star Category Hotel
