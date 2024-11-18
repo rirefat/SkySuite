@@ -17,7 +17,7 @@ const HotelCard = ({ hotelInfo }) => {
 
             {/* Hotel Information */}
             <div className="flex-1">
-                <h2 className="font-bold text-lg md:text-xl">{hotelInfo?.name}</h2>
+                <Link href={`/hotels/${hotelInfo?.id}`} className="font-bold text-lg md:text-xl hover:underline underline-offset-1">{hotelInfo?.name}</Link>
                 <p className="text-sm text-gray-600">📍 {hotelInfo?.city}</p>
 
                 <div className="flex gap-2 items-center my-4">
