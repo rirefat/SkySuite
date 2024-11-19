@@ -2,7 +2,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-const Search = ({ fromList,destination, checkIn, checkOut }) => {
+const Search = ({ fromList, destination, checkIn, checkOut }) => {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -27,7 +27,7 @@ const Search = ({ fromList,destination, checkIn, checkOut }) => {
     setSearchTerm(state);
   }
 
-  const doSearch = (event) => {
+  const doSearch = () => {
     const params = new URLSearchParams(searchParams);
     params.set("destination", searchTerm?.destination || 'all')
 
@@ -54,6 +54,7 @@ const Search = ({ fromList,destination, checkIn, checkOut }) => {
               <select onChange={handleChange} defaultValue={searchTerm.destination} name="destination" id="destination">
                 <option value="Puglia">Puglia</option>
                 <option value="Catania">Catania</option>
+                <option value="Calvi">Calvi</option>
                 <option value="Palermo">Palermo</option>
                 <option value="Frejus">Frejus</option>
                 <option value="Paris">Paris</option>

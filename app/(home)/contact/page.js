@@ -79,7 +79,7 @@ const ContactUs = () => {
             <div className="text-center">
               <button 
                 type="submit" 
-                className="bg-blue-600 text-white py-3 px-8 rounded-lg text-lg hover:bg-blue-700 transition duration-300"
+                className="bg-blue-600 text-white py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-blue-400 transition duration-300"
               >
                 Send Message
               </button>

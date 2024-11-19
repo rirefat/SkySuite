@@ -4,7 +4,7 @@ import HotelReviewsRatings from "./HotelReviewsRatings";
 
 const HotelCard = ({ hotelInfo }) => {
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
-
+    console.log(hotelInfo?.isBooked)
     return (
         <div className="flex flex-col md:flex-row gap-6 border border-gray/20 p-4 rounded-md shadow">
             {/* Hotel Thumbnail */}
@@ -21,11 +21,18 @@ const HotelCard = ({ hotelInfo }) => {
                 <Link href={`/hotels/${hotelInfo?.id}`} className="font-bold text-lg md:text-xl hover:underline underline-offset-1">{hotelInfo?.name}</Link>
                 <p className="text-sm text-gray-600">📍 {hotelInfo?.city}</p>
 
-                <HotelReviewsRatings id={hotelInfo?.id}/>
+                <HotelReviewsRatings id={hotelInfo?.id} />
 
-                <span className="border border-gray-300 text-xs md:text-sm font-semibold text-slate-500 p-2 rounded">
+                <span className=" mr-2border border-gray-300 text-xs md:text-sm font-semibold text-slate-500 p-2 rounded">
                     ⭐ {hotelInfo?.propertyCategory} Star Category Hotel
                 </span>
+
+                {
+                    hotelInfo?.isBooked &&
+                    <span className="rounded-full border border-red-300 text-xs md:text-sm font-semibold text-red-500 px-3 py-1">
+                        Reserved ‼️
+                    </span>
+                }
             </div>
 
             {/* Pricing and Action */}
