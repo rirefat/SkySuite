@@ -2,9 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import HotelReviewsRatings from "./HotelReviewsRatings";
 
-const HotelCard = ({ hotelInfo }) => {
+const HotelCard = ({ hotelInfo, destination, checkIn, checkOut }) => {
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
-    console.log(hotelInfo?.isBooked)
+    let params = '';
+
+    if (checkIn && checkOut) {
+        params = `?checkIn=${checkIn}&checkOut=${checkOut}`;
+    }
+
     return (
         <div className="flex flex-col md:flex-row gap-6 border border-gray/20 p-4 rounded-md shadow">
             {/* Hotel Thumbnail */}
@@ -40,7 +45,7 @@ const HotelCard = ({ hotelInfo }) => {
                 <h2 className="text-xl md:text-2xl font-bold text-right">${perNightCost}/night</h2>
                 <p className="text-sm text-gray-500 text-right">Per Night for 4 Rooms</p>
                 <Link
-                    href={`/hotels/${hotelInfo?.id}`}
+                    href={`/hotels/${hotelInfo?.id}${params}`}
                     className="btn-primary text-sm md:text-base px-4 py-2 mt-2"
                 >
                     Details
