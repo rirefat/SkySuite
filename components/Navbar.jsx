@@ -27,7 +27,7 @@ const Navbar = async ({ sideMenu }) => {
           </li>
 
           <li>
-            <Link href="/about-us">About Us</Link>
+            <Link href="/about">About Us</Link>
           </li>
 
           <li>
