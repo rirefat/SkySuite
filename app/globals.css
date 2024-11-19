@@ -96,6 +96,11 @@ body {
   .login-form input {
     @apply border border-black/20 rounded-md px-4 py-2;
   }
+
+  button:disabled {
+    @apply bg-gray-500 px-8 py-3 rounded-md block text-white font-bold shadow-lg cursor-not-allowed;
+  }
+
 }
 
 .loading {
@@ -124,6 +129,7 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

@@ -26,17 +26,6 @@ const AboutUs = () => {
               To be the leading global brand in luxury travel, offering unparalleled service, comfort, and a commitment to sustainability, creating memories that last a lifetime.
             </p>
           </div>
-
-          {/* Our Values */}
-          <div className="bg-white shadow-xl rounded-xl w-full sm:w-96 p-8 hover:scale-105 transition duration-300 ease-in-out">
-            <h3 className="text-3xl font-semibold text-gray-800 mb-4">Our Values</h3>
-            <ul className="text-gray-600 text-lg leading-relaxed list-disc pl-6">
-              <li>Guest Satisfaction: Always our top priority.</li>
-              <li>Integrity: Transparent and ethical business practices.</li>
-              <li>Excellence: Striving for the best in everything we do.</li>
-              <li>Sustainability: Respecting our environment and communities.</li>
-            </ul>
-          </div>
         </div>
       </section>
 

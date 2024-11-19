@@ -6,6 +6,7 @@ import { getSingleHotel } from "@/database/queries";
 
 export default async function HotelDetailsPage({ params: { id } }) {
     const hotelInfo = await getSingleHotel(id);
+    
 
     return (
         <>
