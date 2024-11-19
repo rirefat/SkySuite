@@ -7,7 +7,7 @@ const HotelCard = ({ hotelInfo, destination, checkIn, checkOut }) => {
     let params = '';
 
     if (checkIn && checkOut) {
-        params = `?checkIn=${checkIn}&checkOut=${checkOut}`;
+        params = `?destination=${destination}&checkIn=${checkIn}&checkOut=${checkOut}`;
     }
 
     return (
