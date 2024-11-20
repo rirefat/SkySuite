@@ -46,10 +46,21 @@ export const findBookings = async (hotelId, checkIn, checkOut) => {
     return found;
 }
 
-export const getSingleHotel = async (id) => {
+export const getSingleHotel = async (id,checkIn, checkOut) => {
     const hotel = await HotelsModel
         .findById(id)
         .lean();
+
+    if(checkIn && checkOut){
+        const found = await findBookings(id, checkIn, checkOut);
+
+        if(found){
+            hotel["isBooked"] = true;
+        }else{
+            hotel["isBooked"] = false;
+        }
+    }
+    
     return replaceMongoIdInObject(hotel);
 }
 
