@@ -1,12 +1,14 @@
+import { auth } from "@/auth";
 import { getSingleHotel } from "@/database/queries";
 import { getReviewsRatings } from "@/utils/getReviewsRatings";
+import Link from "next/link";
 
 const HotelSummaryInfo = async ({ id, destination, checkIn, checkOut }) => {
+
     const hotelInfo = await getSingleHotel(id, checkIn, checkOut);
     const { avgRating, ratingDescription, reviews } = await getReviewsRatings(id);
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
 
-    console.log(hotelInfo?.isBooked);
     return (
         <>
             <div className="flex-1 container">
@@ -31,7 +33,9 @@ const HotelSummaryInfo = async ({ id, destination, checkIn, checkOut }) => {
             <div className="flex flex-col gap-2 items-end justify-center">
                 <h2 className="text-2xl font-bold text-right">${perNightCost}/night</h2>
                 <p className=" text-right">Per Night for 4 Rooms</p>
-                <button disabled={hotelInfo?.isBooked} className="btn-primary ">{hotelInfo?.isBooked ? "No Vacancies" : "Book Now"}</button>
+
+                <button disabled={hotelInfo?.isBooked} className="btn-primary ">{hotelInfo?.isBooked ? "No Vacancies" : "Book Now"}</button>:
+
             </div>
         </>
     );
