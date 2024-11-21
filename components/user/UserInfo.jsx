@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const UserInfo = async () => {
     const session = await auth();
-    console.log(session)
+
     return (
         <div className="container">
             {/* profile info  */}

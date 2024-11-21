@@ -65,6 +65,11 @@ export const findBookings = async (hotelId, checkIn, checkOut) => {
     return found;
 }
 
+export const getBookingsByUser = async (id) => {
+    const bookings = await BookingModel.find({userId: id});
+    return bookings;
+}
+
 export const getHotelRatings = async (hotelId) => {
     const ratings = await RatingsModel
         .find({ hotelId: hotelId })
@@ -83,3 +88,4 @@ export const getUserByEmail = async (email) => {
     const user = await UserModel.find({ email: email }).lean();
     return replaceMongoIdInObject(user[0]);
 }
+

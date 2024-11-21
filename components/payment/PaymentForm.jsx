@@ -9,8 +9,6 @@ const PaymentForm = ({ userInfo, hotelInfo, checkIn, checkOut, cost }) => {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const formData = new FormData(event.currentTarget);
-
             const hotelId = hotelInfo?.id;
             const userId = userInfo?.id;
 

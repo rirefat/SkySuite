@@ -11,7 +11,7 @@ const SocialLogins = () => {
   const handleFacebookAuth = () => {
     signIn("facebook", { callbackUrl: `${process.env.NEXT_PUBLIC_ROOT_PAGE}/bookings` });
   }
-  console.log(process.env.NEXT_PUBLIC_ROOT_PAGE);
+
   return (
     <>
       <div className="flex gap-4">

@@ -34,7 +34,7 @@ const ReviewsSection = () => {
   };
 
   return (
-    <section className="container py-8">
+    <section className="container py-8" id="reviews">
       <h2 className="font-bold text-xl my-4">Reviews</h2>
 
       {/* Reviews List */}

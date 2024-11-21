@@ -28,7 +28,7 @@ const HotelSummaryInfo = async ({ id, destination, checkIn, checkOut }) => {
                         {avgRating.toFixed(1)}
                     </div>
                     <span className="font-medium">{ratingDescription}</span>
-                    <span>{reviews.length} Reviews</span>
+                    <Link href="#reviews">{reviews.length} Reviews</Link>
                 </div>
             </div>
             <div className="flex flex-col gap-2 items-end justify-center">
