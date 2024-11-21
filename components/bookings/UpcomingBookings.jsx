@@ -17,3 +17,5 @@ const UpcomingBookings = ({ bookings }) => {
 };
 
 export default UpcomingBookings;
+
+// #f0dbf1

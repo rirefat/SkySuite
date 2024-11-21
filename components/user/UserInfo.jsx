@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const UserInfo = async () => {
     const session = await auth();
-
+    
     return (
         <div className="container">
             {/* profile info  */}
@@ -23,7 +23,7 @@ const UserInfo = async () => {
                 <div>
                     <h3 className="text-2xl font-semibold lg:text-[28px] flex justify-center items-center gap- capitalize">
                         {session?.user?.name ?? "User Name"}
-                        <span className="rounded-full border border-gray-300 text-xs md:text-sm font-thin text-slate-500 px-3">
+                        <span className="mx-2 rounded-full border border-gray-300 text-xs md:text-sm font-thin text-slate-500 px-3">
                             Not Verified
                         </span>
                     </h3>

@@ -1,7 +1,7 @@
 import { getSingleHotel } from "@/database/queries";
 import { getDayDifferences } from "@/utils";
 
-const BookingCard = async ({ booking, bgColor }) => {
+const BookingCard = async ({ booking }) => {
     const hotelInfo = await getSingleHotel(booking?.hotelId.toString());
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
     const totalDays = getDayDifferences(booking?.checkIn, booking?.checkOut);
@@ -15,9 +15,9 @@ const BookingCard = async ({ booking, bgColor }) => {
                 <div>
                     <h3 className="text-xl font-semibold">{hotelInfo?.name}</h3>
                     <p>📍 {hotelInfo?.city}</p>
-                    <div className="text-sm text-gray-600 my-4">
-                        <p>Check In: <span title="YYYY-MM-DD">{booking.checkIn}</span></p>
-                        <p>Check Out: <span title="YYYY-MM-DD">{booking.checkOut}</span></p>
+                    <div className="text-sm text-black my-4">
+                        <p>Check In: <span className="text-gray-600" title="YYYY-MM-DD">{booking.checkIn}</span></p>
+                        <p>Check Out: <span className="text-gray-600" title="YYYY-MM-DD">{booking.checkOut}</span></p>
                     </div>
                 </div>
 

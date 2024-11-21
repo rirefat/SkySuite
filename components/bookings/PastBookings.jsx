@@ -8,7 +8,7 @@ const PastBookings = ({ bookings }) => {
             {
                 bookings && bookings.length > 1 &&
                 bookings.map(booking => (
-                    <BookingCard key={booking._id} booking={booking}/>
+                    <BookingCard key={booking._id} booking={booking} />
                 ))
             }
         </div>
