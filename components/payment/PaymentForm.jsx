@@ -1,4 +1,4 @@
-const PaymentForm = async ({ userInfo, hotelInfo, checkIn, checkOut }) => {
+const PaymentForm = async ({ userInfo, hotelInfo, checkIn, checkOut,cost }) => {
 
     return (
         <form className="my-8">
@@ -35,6 +35,11 @@ const PaymentForm = async ({ userInfo, hotelInfo, checkIn, checkOut }) => {
                 <h4 className="mt-2">
                     <input type="date" name="checkout" id="checkout" value={checkOut} />
                 </h4>
+            </div>
+
+            <div className="my-4 space-y-2">
+                <label htmlFor="cost" className="block font-semibold">Total Cost</label>
+                <input value={cost} type="text" id="cost" className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md" />
             </div>
 
             <div className="my-4 space-y-2">

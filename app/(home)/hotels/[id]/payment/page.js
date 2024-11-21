@@ -14,7 +14,8 @@ export default async function PaymentPage({ params: { id }, searchParams: { chec
     }
 
     let cost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
-    if (checkIn && checkOut) {
+    const hasCheckInCheckOut = checkIn && checkOut;
+    if (hasCheckInCheckOut) {
         const dayDifferences = getDayDifferences(checkIn, checkOut);
         cost = cost * dayDifferences;
     }
@@ -23,12 +24,13 @@ export default async function PaymentPage({ params: { id }, searchParams: { chec
         <section className="container">
             <div className="p-6 rounded-lg max-w-xl mx-auto my-12 mt-[100px]">
                 <h2 className="font-bold text-2xl">Payment Details</h2>
-                <p className="text-gray-600 text-sm">
-                    You have picked <b>{hotelInfo?.name}</b> for {getDayDifferences(checkIn, checkOut)} day(s) and base price is <b>${cost}</b>
+                <p className="text-gray-600 text-sm my-2">
+                    You have picked <b className="text-black">{hotelInfo?.name}</b> for {hasCheckInCheckOut && getDayDifferences(checkIn, checkOut)} day(s) and base price is <b className="text-black">${cost}</b>
                 </p>
 
                 <PaymentForm
                     id={id}
+                    cost={cost}
                     checkIn={checkIn}
                     checkOut={checkOut}
                     userInfo={userInfo}
