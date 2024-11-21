@@ -20,3 +20,8 @@ export const isDateInBetween = (date, from, to) => {
         new Date(date).getTime() >= new Date(to).getTime()
     )
 }
+
+export const getDayDifferences = (from, to) => {
+    const difference = (new Date(to).getTime() - new Date(from).getTime()) / (1000 * 60 * 60 * 24) + 1;
+    return difference;
+}

@@ -1,8 +1,5 @@
-import { auth } from "@/auth";
+const PaymentForm = async ({ userInfo, hotelInfo, checkIn, checkOut }) => {
 
-const PaymentForm = async ({ checkIn, checkOut }) => {
-    const session = await auth();
-    
     return (
         <form className="my-8">
             <div className="my-4 space-y-2">
@@ -10,7 +7,7 @@ const PaymentForm = async ({ checkIn, checkOut }) => {
                 <input
                     type="text"
                     id="name"
-                    value={session?.user?.name}
+                    value={userInfo?.name}
                     className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md capitalize"
                 />
             </div>
@@ -18,7 +15,7 @@ const PaymentForm = async ({ checkIn, checkOut }) => {
             <div className="my-4 space-y-2">
                 <label htmlFor="email" className="block font-semibold">Email</label>
                 <input
-                    value={session?.user?.email}
+                    value={userInfo?.email}
                     type="email"
                     id="email"
                     className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"

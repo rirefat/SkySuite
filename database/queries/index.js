@@ -3,6 +3,7 @@ import { HotelsModel } from "../models/hotels-model"
 import { RatingsModel } from "../models/ratings-model";
 import { ReviewModel } from "../models/reviews-model";
 import { BookingModel } from "../models/booking-model";
+import { UserModel } from "../models/users-model";
 
 export const getAllHotels = async (destination, checkIn, checkOut) => {
     const regex = new RegExp(destination, 'i');
@@ -31,6 +32,24 @@ export const getAllHotels = async (destination, checkIn, checkOut) => {
     return replaceMongoIdInArray(allHotels);
 }
 
+export const getSingleHotel = async (id, checkIn, checkOut) => {
+    const hotel = await HotelsModel
+        .findById(id)
+        .lean();
+
+    if (checkIn && checkOut) {
+        const found = await findBookings(id, checkIn, checkOut);
+
+        if (found) {
+            hotel["isBooked"] = true;
+        } else {
+            hotel["isBooked"] = false;
+        }
+    }
+
+    return replaceMongoIdInObject(hotel);
+}
+
 export const findBookings = async (hotelId, checkIn, checkOut) => {
     const matches = await BookingModel
         .find({ hotelId: hotelId.toString() })
@@ -46,24 +65,6 @@ export const findBookings = async (hotelId, checkIn, checkOut) => {
     return found;
 }
 
-export const getSingleHotel = async (id,checkIn, checkOut) => {
-    const hotel = await HotelsModel
-        .findById(id)
-        .lean();
-
-    if(checkIn && checkOut){
-        const found = await findBookings(id, checkIn, checkOut);
-
-        if(found){
-            hotel["isBooked"] = true;
-        }else{
-            hotel["isBooked"] = false;
-        }
-    }
-    
-    return replaceMongoIdInObject(hotel);
-}
-
 export const getHotelRatings = async (hotelId) => {
     const ratings = await RatingsModel
         .find({ hotelId: hotelId })
@@ -76,4 +77,9 @@ export const getHotelReviews = async (hotelId) => {
         .find({ hotelId: hotelId })
         .lean();
     return replaceMongoIdInArray(reviews);
+}
+
+export const getUserByEmail = async (email) => {
+    const user = await UserModel.find({ email: email }).lean();
+    return replaceMongoIdInObject(user[0]);
 }
