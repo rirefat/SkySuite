@@ -10,7 +10,7 @@ const BookingCard = async ({ booking }) => {
 
     console.log(hotelInfo)
     return (
-        <div className="bg-[#f0dbf1] p-4 rounded-md shadow">
+        <div className="bg-gradient-to-r from-blue-50/60 to-white rounded-lg shadow-md p-4 ">
             <div className="flex justify-between items-center ">
                 <div>
                     <h3 className="text-xl font-semibold">{hotelInfo?.name}</h3>

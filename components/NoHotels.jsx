@@ -27,9 +27,9 @@ const NoHotels = () => {
                 Unfortunately, we couldn&apos;t find any results matching your search.
                 Consider refining your search criteria or try a different location.
             </p>
-            <button onClick={handleReset} className="px-6 py-3 font-semibold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-700">
+            {/* <button onClick={handleReset} className="px-6 py-3 font-semibold text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-700">
                 Reset Filters
-            </button>
+            </button> */}
         </div>
     );
 };
