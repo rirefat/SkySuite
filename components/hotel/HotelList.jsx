@@ -1,5 +1,6 @@
 import { getAllHotels } from "@/database/queries";
 import HotelCard from "./HotelCard";
+import NoHotels from "../NoHotels";
 
 const HotelList = async ({ destination, checkIn, checkOut, category }) => {
     const allHotels = await getAllHotels(destination, checkIn, checkOut, category);
@@ -9,15 +10,16 @@ const HotelList = async ({ destination, checkIn, checkOut, category }) => {
             <div className="space-y-4">
                 {/* Hotel card */}
                 {
-                    allHotels.map(hotel => (
-                        <HotelCard
-                            key={hotel.id}
-                            hotelInfo={hotel}
-                            destination={destination}
-                            checkIn={checkIn}
-                            checkOut={checkOut}
-                        />
-                    ))
+                    allHotels.length > 0 ?
+                        allHotels.map(hotel => (
+                            <HotelCard
+                                key={hotel.id}
+                                hotelInfo={hotel}
+                                destination={destination}
+                                checkIn={checkIn}
+                                checkOut={checkOut}
+                            />
+                        )) : (<NoHotels />)
                 }
             </div>
         </div>

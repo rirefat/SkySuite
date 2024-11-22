@@ -14,9 +14,9 @@ export const getAllHotels = async (destination, checkIn, checkOut, category) => 
 
     let allHotels = allHotelsByDestination;
 
-    if(category){
+    if (category) {
         const categoriesToMatch = category.split("|");
-        allHotels = allHotels.filter((hotel)=>{
+        allHotels = allHotels.filter((hotel) => {
             return categoriesToMatch.includes(hotel.propertyCategory.toString());
         })
     }
