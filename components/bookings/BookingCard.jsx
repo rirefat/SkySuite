@@ -7,8 +7,6 @@ const BookingCard = async ({ booking }) => {
     const totalDays = getDayDifferences(booking?.checkIn, booking?.checkOut);
     const totalCost = totalDays * perNightCost;
 
-
-    console.log(hotelInfo)
     return (
         <div className="bg-gradient-to-r from-blue-50/60 to-white rounded-lg shadow-md p-4 ">
             <div className="flex justify-between items-center ">

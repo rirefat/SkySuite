@@ -1,9 +1,11 @@
 import { auth } from "@/auth";
 import Image from "next/image";
+import NotVerifiedBadge from '../NotVerifiedBadge';
+import VerifiedBadge from "../VerifiedBadge";
 
 const UserInfo = async () => {
     const session = await auth();
-    
+
     return (
         <div className="container">
             {/* profile info  */}
@@ -23,9 +25,8 @@ const UserInfo = async () => {
                 <div>
                     <h3 className="text-2xl font-semibold lg:text-[28px] flex justify-center items-center gap- capitalize">
                         {session?.user?.name ?? "User Name"}
-                        <span className="mx-2 rounded-full border border-gray-300 text-xs md:text-sm font-thin text-slate-500 px-3">
-                            Not Verified
-                        </span>
+                        <NotVerifiedBadge />
+                        {/* <VerifiedBadge/> */}
                     </h3>
                     <p className="leading-[231%] lg:text-lg text-gray-600">{session?.user?.email ?? "User Email"}</p>
                 </div>
