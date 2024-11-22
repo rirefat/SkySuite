@@ -1,7 +1,7 @@
 import AmenitiesFilter from "./AmenitiesFilter";
+import StarCategoryFilter from "./StarCategoryFilter";
 import HotelSort from "./HotelSort";
 import PriceFilter from "./PriceFilter";
-import RatingsFilter from "./RatingsFilter";
 
 const Filter = () => {
   return (
@@ -10,7 +10,7 @@ const Filter = () => {
 
         <HotelSort />
         <PriceFilter />
-        <RatingsFilter />
+        <StarCategoryFilter />
         <AmenitiesFilter />
       </div>
     </>
