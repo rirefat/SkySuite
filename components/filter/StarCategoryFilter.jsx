@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -42,7 +43,6 @@ const StarCategoryFilter = () => {
 
         replace(`${pathName}?${params.toString()}`);
     }, [query]);
-    
 
     return (
         <div>
@@ -51,10 +51,10 @@ const StarCategoryFilter = () => {
                 <label htmlFor="fiveStar" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
-                        checked={query.includes('fiveStar')}
+                        checked={query.includes('5')}
                         className="mr-2"
                         type="checkbox"
-                        name="fiveStar"
+                        name="5"
                         id="fiveStar"
                     />5 Star
                 </label>
@@ -62,10 +62,10 @@ const StarCategoryFilter = () => {
                 <label htmlFor="fourStar" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
-                        checked={query.includes('fourStar')}
+                        checked={query.includes('4')}
                         className="mr-2"
                         type="checkbox"
-                        name="fourStar"
+                        name="4"
                         id="fourStar"
                     />4 Star
                 </label>
@@ -73,21 +73,21 @@ const StarCategoryFilter = () => {
                 <label htmlFor="threeStar" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
-                        checked={query.includes('threeStar')}
+                        checked={query.includes('3')}
                         className="mr-2"
                         type="checkbox"
-                        name="threeStar
-                      " id="threeStar
-                      " />3 Star
+                        name="3"
+                       id="threeStar"
+                       />3 Star
                 </label>
 
                 <label htmlFor="twoStar" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
-                        checked={query.includes('twoStar')}
+                        checked={query.includes('2')}
                         className="mr-2"
                         type="checkbox"
-                        name="twoStar"
+                        name="2"
                         id="twoStar" />
                     2 Star
                 </label>
@@ -95,10 +95,10 @@ const StarCategoryFilter = () => {
                 <label htmlFor="oneStar" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
-                        checked={query.includes('oneStar')}
+                        checked={query.includes('1')}
                         className="mr-2"
                         type="checkbox"
-                        name="oneStar"
+                        name="1"
                         id="oneStar" />
                     1 Star
                 </label>

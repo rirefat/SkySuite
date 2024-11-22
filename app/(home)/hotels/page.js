@@ -3,8 +3,18 @@ import Filter from "@/components/filter/Filter";
 import Search from "@/components/search/Search";
 import { Suspense } from "react";
 
-export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut } }) {
-    
+const refinedCategory = (category) => {
+    const decodedCategory = decodeURI(category);
+
+    if (decodedCategory === "undefined") {
+        return "";
+    } else {
+        return decodedCategory;
+    }
+}
+
+export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category } }) {
+
 
     return (
         <>
@@ -33,7 +43,8 @@ export default async function HotelListPage({ searchParams: { destination, check
                         <HotelList
                             destination={destination}
                             checkIn={checkIn}
-                            checkOut={checkOut}
+                            checkOut={checkOut}                            
+                            category={refinedCategory(category)}
                         />
                     </Suspense>
                 </div>

@@ -5,7 +5,7 @@ import { ReviewModel } from "../models/reviews-model";
 import { BookingModel } from "../models/booking-model";
 import { UserModel } from "../models/users-model";
 
-export const getAllHotels = async (destination, checkIn, checkOut) => {
+export const getAllHotels = async (destination, checkIn, checkOut, category) => {
     const regex = new RegExp(destination, 'i');
     const allHotelsByDestination = await HotelsModel
         .find({ city: { $regex: regex } })
@@ -13,6 +13,13 @@ export const getAllHotels = async (destination, checkIn, checkOut) => {
         .lean();
 
     let allHotels = allHotelsByDestination;
+
+    if(category){
+        const categoriesToMatch = category.split("|");
+        allHotels = allHotels.filter((hotel)=>{
+            return categoriesToMatch.includes(hotel.propertyCategory.toString());
+        })
+    }
 
     if (checkIn && checkOut) {
         allHotels = await Promise.all(
@@ -66,7 +73,7 @@ export const findBookings = async (hotelId, checkIn, checkOut) => {
 }
 
 export const getBookingsByUser = async (id) => {
-    const bookings = await BookingModel.find({userId: id});
+    const bookings = await BookingModel.find({ userId: id });
     return bookings;
 }
 

@@ -3,7 +3,7 @@ import StarCategoryFilter from "./StarCategoryFilter";
 import HotelSort from "./HotelSort";
 import PriceFilter from "./PriceFilter";
 
-const Filter = () => {
+const Filter = ({category}) => {
   return (
     <>
       <div className="col-span-3 space-y-4">
