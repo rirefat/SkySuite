@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -76,8 +77,8 @@ const StarCategoryFilter = () => {
                         className="mr-2"
                         type="checkbox"
                         name="3"
-                       id="threeStar"
-                       />3 Star
+                        id="threeStar"
+                    />3 Star
                 </label>
 
                 <label htmlFor="twoStar" className="cursor-pointer hover:text-blue-600">

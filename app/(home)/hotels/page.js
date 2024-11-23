@@ -13,8 +13,7 @@ const refinedCategory = (category) => {
     }
 }
 
-export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category } }) {
-
+export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category, sort } }) {
 
     return (
         <>
@@ -43,8 +42,9 @@ export default async function HotelListPage({ searchParams: { destination, check
                         <HotelList
                             destination={destination}
                             checkIn={checkIn}
-                            checkOut={checkOut}                            
+                            checkOut={checkOut}
                             category={refinedCategory(category)}
+                            sort={sort}
                         />
                     </Suspense>
                 </div>

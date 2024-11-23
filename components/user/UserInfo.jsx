@@ -25,8 +25,9 @@ const UserInfo = async () => {
                 <div>
                     <h3 className="text-2xl font-semibold lg:text-[28px] flex justify-center items-center gap- capitalize">
                         {session?.user?.name ?? "User Name"}
-                        <NotVerifiedBadge />
-                        {/* <VerifiedBadge/> */}
+                        {
+                            session?.user?.emailVerified ? <VerifiedBadge /> : <NotVerifiedBadge />
+                        }
                     </h3>
                     <p className="leading-[231%] lg:text-lg text-gray-600">{session?.user?.email ?? "User Email"}</p>
                 </div>

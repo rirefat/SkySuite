@@ -5,7 +5,7 @@ import { ReviewModel } from "../models/reviews-model";
 import { BookingModel } from "../models/booking-model";
 import { UserModel } from "../models/users-model";
 
-export const getAllHotels = async (destination, checkIn, checkOut, category) => {
+export const getAllHotels = async (destination, checkIn, checkOut, category, sort) => {
     const regex = new RegExp(destination, 'i');
     const allHotelsByDestination = await HotelsModel
         .find({ city: { $regex: regex } })
@@ -19,6 +19,24 @@ export const getAllHotels = async (destination, checkIn, checkOut, category) => 
         allHotels = allHotels.filter((hotel) => {
             return categoriesToMatch.includes(hotel.propertyCategory.toString());
         })
+    }
+
+    if (sort) {
+        if (sort === 'lowToHigh') {
+            allHotels.sort((a, b) => {
+                const hotelACost = (a.highRate + a.lowRate) / 2;
+                const hotelBCost = (b.highRate + b.lowRate) / 2;
+
+                return hotelACost - hotelBCost;
+            })
+        } else {
+            allHotels.sort((a, b) => {
+                const hotelACost = (a.highRate + a.lowRate) / 2;
+                const hotelBCost = (b.highRate + b.lowRate) / 2;
+
+                return hotelBCost - hotelACost;
+            })
+        }
     }
 
     if (checkIn && checkOut) {
