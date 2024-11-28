@@ -4,12 +4,13 @@ import { RatingsModel } from "../models/ratings-model";
 import { ReviewModel } from "../models/reviews-model";
 import { BookingModel } from "../models/booking-model";
 import { UserModel } from "../models/users-model";
+import { AmenitiesModel } from "../models/amenity-model";
 
-export const getAllHotels = async (destination, checkIn, checkOut, category, sort) => {
+export const getAllHotels = async (destination, checkIn, checkOut, category, sort, amenities) => {
     const regex = new RegExp(destination, 'i');
     const allHotelsByDestination = await HotelsModel
         .find({ city: { $regex: regex } })
-        .select(["thumbNailUrl", "name", "highRate", "lowRate", "city", "propertyCategory"])
+        .select(["thumbNailUrl", "name", "highRate", "lowRate", "city", "propertyCategory", "amenities"])
         .lean();
 
     let allHotels = allHotelsByDestination;
@@ -37,6 +38,26 @@ export const getAllHotels = async (destination, checkIn, checkOut, category, sor
                 return hotelBCost - hotelACost;
             })
         }
+    }
+
+    if (amenities) {
+        const amenitiesToMatch = amenities.split("|");
+        console.log(amenitiesToMatch)
+
+        allHotels = allHotels.filter((hotel) => {
+            if (hotel.amenities.length > 0) {
+                const result = hotel.amenities.filter(async amenity => {
+                    console.log(amenity.toString())
+                    const providedAmenity = await getAmenity(amenity.toString());
+                    console.log(providedAmenity.name)
+                    return amenitiesToMatch.includes(providedAmenity?.name)
+                });
+                return result;
+            } else {
+                return false;
+            }
+        }
+        );
     }
 
     if (checkIn && checkOut) {
@@ -114,3 +135,7 @@ export const getUserByEmail = async (email) => {
     return replaceMongoIdInObject(user[0]);
 }
 
+const getAmenity = async (id) => {
+    const amenity = await AmenitiesModel.findById(id);
+    return amenity;
+}

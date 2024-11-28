@@ -3,7 +3,7 @@ import Filter from "@/components/filter/Filter";
 import Search from "@/components/search/Search";
 import { Suspense } from "react";
 
-const refinedCategory = (category) => {
+const refinedQuery = (category) => {
     const decodedCategory = decodeURI(category);
 
     if (decodedCategory === "undefined") {
@@ -13,8 +13,7 @@ const refinedCategory = (category) => {
     }
 }
 
-export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category, sort } }) {
-
+export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category, sort, amenities } }) {
     return (
         <>
             {/* Search Modify Area  */}
@@ -43,8 +42,9 @@ export default async function HotelListPage({ searchParams: { destination, check
                             destination={destination}
                             checkIn={checkIn}
                             checkOut={checkOut}
-                            category={refinedCategory(category)}
+                            category={refinedQuery(category)}
                             sort={sort}
+                            amenities={refinedQuery(amenities)}
                         />
                     </Suspense>
                 </div>
