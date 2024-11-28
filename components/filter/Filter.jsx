@@ -9,9 +9,9 @@ const Filter = ({category}) => {
       <div className="col-span-3 space-y-4">
 
         <HotelSort />
-        <PriceFilter />
+        {/* <PriceFilter /> */}
         <StarCategoryFilter />
-        <AmenitiesFilter />
+        {/* <AmenitiesFilter /> */}
       </div>
     </>
   );
