@@ -9,7 +9,6 @@ const HotelSummaryInfo = async ({ id, destination, checkIn, checkOut }) => {
     const { avgRating, ratingDescription, reviews } = await getReviewsRatings(id);
     const perNightCost = (hotelInfo?.highRate + hotelInfo?.lowRate) / 2;
 
-
     return (
         <>
             <div className="flex-1 container">

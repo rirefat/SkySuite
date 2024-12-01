@@ -13,7 +13,6 @@ export const getReviewsRatings = async (id) => {
         avgRating = ratings.reduce((sum, current) => (sum + current.rating), 0) / ratings.length;
     }
 
-
     if (avgRating === 0) {
         ratingDescription = "No Ratings";
     } else if (avgRating > 0 && avgRating <= 2) {
