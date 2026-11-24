@@ -1,50 +1,37 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client'
+'use client';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const HotelSort = () => {
-    const [sorting, setSorting] = useState("");
     const searchParams = useSearchParams();
     const pathName = usePathname();
     const { replace } = useRouter();
 
-    const params = new URLSearchParams(searchParams);
-
-    const handleChange = (event) => {
-        event.preventDefault();
-        const value = event.target.value;
-
-        if (value) {
-            setSorting(value)
-        } else {
-
-            setSorting("");
-        }
-    }
-
-    useEffect(()=>{
-        const sortValue = params.get('sort')
-        if(sortValue){
-            setSorting(sortValue);
-        }
-    },[])
+    const [sorting, setSorting] = useState("");
 
     useEffect(() => {
-        if (sorting) {
-            params.set('sort', sorting)
+        const sortValue = searchParams.get('sort');
+        setSorting(sortValue || "");
+    }, [searchParams]);
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        setSorting(value);
+
+        const params = new URLSearchParams(searchParams.toString());
+        if (value) {
+            params.set('sort', value);
         } else {
-            params.delete('sort')
+            params.delete('sort');
         }
 
         replace(`${pathName}?${params.toString()}`);
-    }, [sorting])
-
+    };
 
     return (
         <div>
             <h3 className="font-bold text-lg">Sort By</h3>
-            <form action="" className="flex flex-col gap-2 mt-2">
+            <form className="flex flex-col gap-2 mt-2">
                 <label htmlFor="highToLow" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}
@@ -68,9 +55,8 @@ const HotelSort = () => {
                         value="lowToHigh"
                         checked={sorting === "lowToHigh"}
                     />
-                    Price Low to high
+                    Price Low to High
                 </label>
-
             </form>
         </div>
     );

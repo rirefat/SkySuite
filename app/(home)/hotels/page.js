@@ -4,22 +4,20 @@ import Search from "@/components/search/Search";
 import { Suspense } from "react";
 
 const refinedQuery = (category) => {
-    const decodedCategory = decodeURI(category);
+    if (!category || category === "undefined") return "";
+    return decodeURI(category);
+};
 
-    if (decodedCategory === "undefined") {
-        return "";
-    } else {
-        return decodedCategory;
-    }
-}
+export default async function HotelListPage(props) {
+    const searchParams = await props.searchParams;
+    const { destination, checkIn, checkOut, category, sort, amenities } = searchParams || {};
 
-export default async function HotelListPage({ searchParams: { destination, checkIn, checkOut, category, sort, amenities } }) {
     return (
         <>
-            {/* Search Modify Area  */}
+            {/* Search Modify Area */}
             <section className="bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center pt-[100px] pb-[60px]">
-                <div className="container items-center py-12 ">
-                    <div className="lg:max-h-[250px] ">
+                <div className="container items-center py-12">
+                    <div className="lg:max-h-[250px]">
                         <Search
                             fromList={true}
                             destination={destination}
@@ -30,14 +28,14 @@ export default async function HotelListPage({ searchParams: { destination, check
                 </div>
             </section>
 
-            {/* Search Result Area  */}
+            {/* Search Result Area */}
             <section className="py-12">
-                <div className="container grid grid-cols-12">
+                <div className="container grid grid-cols-12 gap-8">
                     {/* Filtering area */}
                     <Filter />
 
                     {/* Hotel list area */}
-                    <Suspense fallback={<p className="text-center w-full">Loading...</p>}>
+                    <Suspense fallback={<p className="text-center w-full col-span-12 md:col-span-9 py-12">Loading hotels...</p>}>
                         <HotelList
                             destination={destination}
                             checkIn={checkIn}
@@ -48,7 +46,6 @@ export default async function HotelListPage({ searchParams: { destination, check
                         />
                     </Suspense>
                 </div>
-
             </section>
         </>
     );

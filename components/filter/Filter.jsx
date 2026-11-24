@@ -1,19 +1,14 @@
 import AmenitiesFilter from "./AmenitiesFilter";
 import StarCategoryFilter from "./StarCategoryFilter";
 import HotelSort from "./HotelSort";
-import PriceFilter from "./PriceFilter";
 
-const Filter = ({category}) => {
+const Filter = () => {
   return (
-    <>
-      <div className="col-span-3 space-y-4">
-
-        <HotelSort />
-        {/* <PriceFilter /> */}
-        <StarCategoryFilter />
-        {/* <AmenitiesFilter /> */}
-      </div>
-    </>
+    <aside className="col-span-12 md:col-span-3 space-y-6">
+      <HotelSort />
+      <StarCategoryFilter />
+      <AmenitiesFilter />
+    </aside>
   );
 };
 

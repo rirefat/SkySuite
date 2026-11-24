@@ -3,48 +3,44 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const AmenitiesFilter = () => {
-    const [amenities, setAmenities] = useState([]);
     const searchParams = useSearchParams();
     const pathName = usePathname();
     const { replace } = useRouter();
-    const params = new URLSearchParams(searchParams);
+
+    const [amenities, setAmenities] = useState([]);
+
+    useEffect(() => {
+        const amenitiesParam = searchParams.get('amenities');
+        if (amenitiesParam) {
+            setAmenities(decodeURI(amenitiesParam).split("|"));
+        } else {
+            setAmenities([]);
+        }
+    }, [searchParams]);
 
     const handleChange = (event) => {
-        event.preventDefault();
         const name = event.target.name;
         const checked = event.target.checked;
+        const updated = checked
+            ? [...amenities, name]
+            : amenities.filter(item => item !== name);
 
-        if (checked) {
-            setAmenities(prev => [...prev, name])
-        } else {
-            const filteredAmenities = amenities.filter(item => item !== name);
-            setAmenities(filteredAmenities);
-        }
-    }
+        setAmenities(updated);
 
-    useEffect(() => {
-        const amenities = params.get('amenities');
-        if (amenities) {
-            const decodedAmenities = decodeURI(amenities);
-            const amenitiesInQuery = decodedAmenities.split("|");
-            setAmenities(amenitiesInQuery);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (amenities.length > 0) {
-            params.set('amenities', encodeURI(amenities.join('|')));
+        const params = new URLSearchParams(searchParams.toString());
+        if (updated.length > 0) {
+            params.set('amenities', encodeURI(updated.join('|')));
         } else {
             params.delete('amenities');
         }
 
         replace(`${pathName}?${params.toString()}`);
-    }, [amenities])
+    };
 
     return (
         <div>
             <h3 className="font-bold text-lg">Amenities</h3>
-            <form action="" className="flex flex-col gap-2 mt-2">
+            <form className="flex flex-col gap-2 mt-2">
                 <label htmlFor="wifi" className="cursor-pointer hover:text-blue-600">
                     <input
                         onChange={handleChange}

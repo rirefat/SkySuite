@@ -6,6 +6,7 @@ import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import client from "./database/lib/mongoClientPromise";
 import { UserModel } from "./database/models/users-model";
+import { connectDB } from "./database/service/mongo";
 
 export const {
     handlers: { GET, POST },
@@ -23,26 +24,31 @@ export const {
             },
 
             async authorize(credentials) {
-                if (credentials == null) return null;
+                if (!credentials?.email || !credentials?.password) return null;
 
                 try {
-                    const user = await UserModel.findOne({ email: credentials?.email });
+                    await connectDB();
+                    const user = await UserModel.findOne({ email: credentials.email }).lean();
 
-                    if (user) {
-                        const isMatch = bcrypt.compare(user.password, credentials.password);
-
-                        if (isMatch) {
-                            return user;
-                        } else {
-                            throw new Error("Wrong email or password!")
-                        }
-
-                    } else {
+                    if (!user) {
                         throw new Error("User not found!");
                     }
 
+                    const isMatch = await bcrypt.compare(credentials.password, user.password);
+
+                    if (!isMatch) {
+                        throw new Error("Wrong email or password!");
+                    }
+
+                    return {
+                        id: user._id.toString(),
+                        name: user.name,
+                        email: user.email,
+                        image: user.image
+                    };
+
                 } catch (error) {
-                    throw new Error(error);
+                    throw new Error(error.message || error);
                 }
             }
         }),
@@ -54,6 +60,19 @@ export const {
             clientId: process.env.AUTH_FACEBOOK_ID,
             clientSecret: process.env.AUTH_FACEBOOK_SECRET
         }),
-
-    ]
-})
+    ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.id = token.id || token.sub;
+            }
+            return session;
+        }
+    }
+});

@@ -1,14 +1,17 @@
-'use client'
+'use client';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegistrationForm = () => {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -30,20 +33,31 @@ const RegistrationForm = () => {
         })
       });
 
-      res.status === 201 && router.push('/login')
-
+      if (res.status === 201) {
+        router.push('/login');
+      } else {
+        const message = await res.text();
+        setError(message || "Registration failed.");
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
-      <div className="text-xl text-red-500 text-center">{error && error}</div>
+      {error && (
+        <div className="p-3 my-3 text-sm text-red-700 bg-red-100 border border-red-300 rounded-md text-center">
+          {error}
+        </div>
+      )}
+
       <form className="login-form" onSubmit={onSubmit}>
         <div>
           <label htmlFor="fname">First Name</label>
-          <input type="text" name="fname" id="fname" />
+          <input required type="text" name="fname" id="fname" />
         </div>
 
         <div>
@@ -53,23 +67,25 @@ const RegistrationForm = () => {
 
         <div>
           <label htmlFor="email">Email Address</label>
-          <input type="email" name="email" id="email" />
+          <input required type="email" name="email" id="email" />
         </div>
 
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" />
+          <input required minLength={5} type="password" name="password" id="password" />
         </div>
 
-        <button type="submit" className="btn-primary w-full mt-4">
-          Create account
+        <button type="submit" disabled={loading} className="btn-primary w-full mt-4 disabled:opacity-50">
+          {loading ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-
-      <div className="text-center text-s text-gray-500">
-        <Link href='/login' className="text-blue-600 font-bold hover:underline mx-1">Login</Link>
-        or SignUp with
+      <div className="text-center text-sm text-gray-500">
+        Already have an account?
+        <Link href='/login' className="text-blue-600 font-bold hover:underline mx-1">
+          Login
+        </Link>
+        or sign up with
       </div>
     </>
   );

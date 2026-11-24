@@ -7,21 +7,24 @@ import { redirect } from "next/navigation";
 
 export default async function BookingsPage() {
     const session = await auth();
-    const userInfo = await getUserByEmail(session?.user?.email);
-    const allBookings = await getBookingsByUser(userInfo?.id);
+
+    // Guard route before any queries execute
+    if (!session?.user) {
+        redirect("/login");
+    }
+
+    const userInfo = await getUserByEmail(session.user.email);
+    const allBookings = userInfo?.id ? await getBookingsByUser(userInfo.id) : [];
+
+    const now = new Date().getTime();
 
     const pastBookings = allBookings.filter((booking) => {
-        return (new Date().getTime() > new Date(booking.checkIn).getTime());
+        return now > new Date(booking.checkIn).getTime();
     });
 
     const upcomingBookings = allBookings.filter((booking) => {
-        return (new Date().getTime() < new Date(booking.checkIn).getTime());
+        return now <= new Date(booking.checkIn).getTime();
     });
-
-
-    if (!session) {
-        redirect("/login")
-    }
 
     return (
         <>
@@ -29,16 +32,14 @@ export default async function BookingsPage() {
                 <UserInfo />
             </section>
 
-            <section>
+            <section className="pb-16">
                 <div className="container">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Past Bookings */}
+                        <PastBookings bookings={pastBookings} />
 
-                        {/* Past Bookings  */}
-                        <PastBookings bookings={pastBookings}/>
-
-                        {/* Upcoming Bookings  */}
-                        <UpcomingBookings bookings={upcomingBookings}/>
-
+                        {/* Upcoming Bookings */}
+                        <UpcomingBookings bookings={upcomingBookings} />
                     </div>
                 </div>
             </section>
